@@ -1,0 +1,30 @@
+POST http://localhost:3333/produtos
+Content-Type: application/json
+
+{
+    "nome": "Brigadeiro Gourmet",
+    "descricao": "Brigadeiro top",
+    "preco": 5,
+    "tipo_de_medida": "Unidade",
+    "ingredientes":"chocolate, leite condensado, manteiga"
+}
+###
+
+GET http://localhost:3333/produtos?search=Brigadeiro
+
+###
+
+PUT  http://localhost:3333/produtos/1
+Content-Type: application/json
+
+{
+    "nome": "Brigadeiro de Ninho Gourmet",
+    "descricao": "Brigadeiro top",
+    "preco": 7,
+    "tipo_de_medida": "Unidade",
+    "ingredientes":"chocolate, leite condensado, manteiga"
+}
+
+###
+
+DELETE http://localhost:3333/produtos/2
