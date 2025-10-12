@@ -1,3 +1,5 @@
+// produtos
+###
 POST http://localhost:3333/produtos
 Content-Type: application/json
 
@@ -28,3 +30,35 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3333/produtos/2
+###
+
+
+// auth
+POST http://localhost:3333/auth/user
+Content-Type: application/json
+
+{
+    "nome": "leonardo",
+    "email": "teste@teste.com",
+    "senha": "1234",
+    "tipo_acesso": "1"
+}
+###
+
+GET http://localhost:3333/auth/user
+###
+
+PUT  http://localhost:3333/auth/user/1
+Content-Type: application/json
+
+{
+    "nome": "leonardo hehe",
+    "email": "teste@teste.com",
+    "senha": "1234",
+    "tipo_acesso": "1"
+}
+
+###
+
+DELETE http://localhost:3333/auth/user/1
+###
