@@ -34,17 +34,28 @@ DELETE http://localhost:3333/produtos/2
 
 
 // auth
-POST http://localhost:3333/auth/user
+POST http://localhost:3333/auth/user/register
 Content-Type: application/json
 
 {
-    "nome": "leonardo",
-    "email": "teste@teste.com",
-    "senha": "1234",
-    "tipo_acesso": "1"
+    "nome": "Vitoria",
+    "email": "vitoria@test1e.com",
+    "senha": "1234"
 }
 ###
 
+POST  http://localhost:3333/auth/user/login
+Content-Type: application/json
+
+{
+    "email": "teste@teste.com",
+    "senha": "1234"
+}
+
+###
+
+
+// Users control
 GET http://localhost:3333/auth/user
 ###
 
@@ -62,3 +73,6 @@ Content-Type: application/json
 
 DELETE http://localhost:3333/auth/user/1
 ###
+
+
+

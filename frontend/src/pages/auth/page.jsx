@@ -33,7 +33,8 @@ export default function Auth(){
                 
                 break
             case 'signup':
-                if(FormData.password === FormData.confirmPassword){
+                if(FormData.senha != FormData.confirmPassword){
+                    console.log('Erro ao cadastrar! Senhas incompatíveis.')
                     return
                 }
                 
@@ -59,7 +60,7 @@ export default function Auth(){
                     required
                     label="Senha"
                     type="password"
-                    name="password"
+                    name="senha"
                     onChange={handleFormDataChange}
                     />
                     <Button type="submit">Entrar</Button>
@@ -77,7 +78,7 @@ export default function Auth(){
                     required
                     label="Nome"
                     type="fullname"
-                    name="fullname"
+                    name="nome"
                     onChange={handleFormDataChange}
                     />
                     <TextField 
@@ -91,7 +92,7 @@ export default function Auth(){
                     required
                     label="Senha"
                     type="password"
-                    name="password"
+                    name="senha"
                     onChange={handleFormDataChange}
                     />
                     <TextField 

@@ -14,14 +14,7 @@ export class DatabasePostgresAuth {
         return usuarios
     }
 
-    async create(usuario){
-        const {nome, email, senha, tipo_acesso} = usuario
-
-        await sql`INSERT INTO usuarios (
-        nome, email, senha, tipo_acesso) VALUES
-        (${nome}, ${email},${senha}, ${tipo_acesso})`
-
-    }
+    
     
     async update(id, usuario){
         const {nome, email, senha, tipo_acesso} = usuario
@@ -36,5 +29,26 @@ export class DatabasePostgresAuth {
 
     async delete(id){
         await sql`DELETE FROM usuario WHERE id = ${id}`
+    }
+
+
+    async register(usuario){
+        const {nome, email, senha} = usuario
+
+        await sql`INSERT INTO usuarios (
+        nome, email, senha, tipo_acesso) VALUES
+        (${nome}, ${email},${senha}, 0)`
+
+    }
+
+    async login(usuario){
+
+        let userLogged
+
+        const {email, senha} = usuario
+
+        userLogged = await sql`SELECT id, nome, tipo_acesso from usuarios  WHERE email = ${email} AND senha = ${senha}`
+        
+        return userLogged
     }
 }

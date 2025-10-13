@@ -1,17 +1,19 @@
 
 import {fastify} from 'fastify'
-
 import { DatabasePostgres } from './database-postgres.js'
 import { DatabasePostgresAuth } from './auth/database-postgres.js'
-
+import fastifyCors from '@fastify/cors';
 import { send } from 'process'
 
 const server = fastify()
-
 const database = new DatabasePostgres()
-
-
 const databaseAuth = new DatabasePostgresAuth()
+
+
+// 1. Registrar o plugin
+server.register(fastifyCors, { 
+    origin: true 
+});
 
 
 // produtos
@@ -63,22 +65,33 @@ server.delete('/produtos/:id' , async (request, reply) => {
 })
 
 
-
-
 // auth
 
-server.post('/auth/user' , async (request, reply) => {
-    const {nome, email, senha, tipo_acesso} = request.body
+server.post('/auth/user/register' , async (request, reply) => {
+    const {nome, email, senha} = request.body
 
-    await databaseAuth.create({
+    await databaseAuth.register({
         nome,
         email,
         senha,
-        tipo_acesso,
     })
 
     return reply.status(201).send()
 })
+
+server.post('/auth/user/login' , async (request, reply) => {
+    const {email, senha} = request.body
+
+    const userLogged = await databaseAuth.login({
+        email,
+        senha
+    })
+
+    return reply.status(200).send(userLogged)
+})
+
+
+// Users control
 
 server.get('/auth/user' , async (request, reply) => {
     const search = request.query.search
@@ -110,8 +123,6 @@ server.delete('/auth/user/:id' , async (request, reply) => {
 
     return reply.status(204).send()
 })
-
-
 
 
 
