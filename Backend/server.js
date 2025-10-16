@@ -4,6 +4,8 @@ import { DatabasePostgres } from './database-postgres.js'
 import { DatabasePostgresAuth } from './auth/database-postgres.js'
 import fastifyCors from '@fastify/cors';
 import { send } from 'process'
+import 'dotenv/config';
+import jwt from 'jsonwebtoken';
 
 const server = fastify()
 const database = new DatabasePostgres()
@@ -80,14 +82,48 @@ server.post('/auth/user/register' , async (request, reply) => {
 })
 
 server.post('/auth/user/login' , async (request, reply) => {
-    const {email, senha} = request.body
+    try {
+        const {email, senha} = request.body
 
-    const userLogged = await databaseAuth.login({
-        email,
-        senha
-    })
+        const userLoggedArray = await databaseAuth.login({
+            email,
+            senha
+        })
 
-    return reply.status(200).send(userLogged)
+        if (userLoggedArray && userLoggedArray.length > 0) {
+            const user = userLoggedArray[0];
+
+            // 2. Criar o "payload" do token com dados do usuário
+            const payload = {
+                userId: user.id,
+                nome: user.nome,
+                tipo_acesso: user.tipo_acesso
+            };
+
+            // 3. Gerar o token JWT
+            const token = jwt.sign(
+                payload,              // Dados que estarão dentro do token
+                process.env.JWT_SECRET, // Sua chave secreta
+                { expiresIn: '1h' }     // Opções (ex: token expira em 1 hora)
+            );
+
+            // 4. Enviar o token na resposta
+            return reply.status(200).send({
+                success: true,
+                message: "Usuário logado com sucesso!",
+                token: token // Envia o token para o cliente
+            });
+
+        } else {
+            return reply.status(401).send({
+                success: false,
+                message: "Email ou senha inválidos."
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        return reply.status(500).send({ message: "Erro interno do servidor." });
+    }
 })
 
 

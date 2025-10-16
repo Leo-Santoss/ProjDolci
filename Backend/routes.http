@@ -4,15 +4,15 @@ POST http://localhost:3333/produtos
 Content-Type: application/json
 
 {
-    "nome": "Brigadeiro Gourmet",
-    "descricao": "Brigadeiro top",
-    "preco": 5,
-    "tipo_de_medida": "Unidade",
+    "nome": "Bolo de chocolate",
+    "descricao": "Bolo top",
+    "preco": 3,
+    "tipo_de_medida": "fatia",
     "ingredientes":"chocolate, leite condensado, manteiga"
 }
 ###
 
-GET http://localhost:3333/produtos?search=Brigadeiro
+GET http://localhost:3333/produtos?search=Bolo
 
 ###
 
