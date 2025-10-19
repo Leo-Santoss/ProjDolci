@@ -1,0 +1,55 @@
+/* Footer.module.css */
+
+.footerContainer {
+  background-color: #8FD4D0;
+  color: #2D3748; /* text-gray-800 */
+  padding: 48px 0;
+}
+
+.dolciTitle {
+  font-weight: bold !important; /* !important para sobrescrever MUI */
+  margin-bottom: 16px !important;
+}
+
+.socialSubtitle {
+  margin-bottom: 16px !important;
+}
+
+.socialIcon svg {
+  color: #2D3748;
+  transition: color 0.3s ease;
+}
+
+.socialIcons{
+  display: flex;
+  gap: 4px;
+}
+
+.socialIcon:hover svg {
+  color: #78341C;
+}
+
+.sectionTitle {
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+}
+
+.footerLink {
+  display: block;
+  color: inherit;
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 8px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+  color: #78341C;
+}
+
+.copyrightText {
+  margin-top: 24px !important;
+  color: #4A5568; /* text-gray-700 */
+  font-size: 0.875rem !important;
+}

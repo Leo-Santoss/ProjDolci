@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans JP", sans-serif;
+    text-decoration: none;
+}
+
+#root{
+    font-size: xx-large;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o contêiner tenha no mínimo 100% da altura da tela */
+}
+
+.pageContent {
+  flex: 1; /* Faz com que este elemento cresça e ocupe todo o espaço disponível, empurrando o footer para baixo */
+}
+
+.botao{
+  background-color: #78341C !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: none !important; /* Remove o 'uppercase' padrão do MUI */
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease;
+  width:fit-content;
+  border: none;
+}
+
+.botao:hover {
+  background-color: #5c2815 !important;
+}
