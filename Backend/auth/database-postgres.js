@@ -47,7 +47,7 @@ export class DatabasePostgresAuth {
 
         const {email, senha} = usuario
 
-        userLogged = await sql`SELECT id, nome, tipo_acesso from usuarios  WHERE email = ${email} AND senha = ${senha}`
+        userLogged = await sql`SELECT id, nome, tipo_acesso, email from usuarios  WHERE email = ${email} AND senha = ${senha}`
         
         return userLogged
     }

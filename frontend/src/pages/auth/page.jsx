@@ -2,13 +2,21 @@ import { useState } from "react"
 import { TextField, Button } from "@mui/material"
 import styles from './page.module.css'
 import AuthServices from "../../services/auth"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function Auth(){
     const[formType, setFormType] = useState('login')
     const[FormData, setFormData] = useState(null)
     const { login, signup, authLoading } = AuthServices() 
 
-    
+    const navigate = useNavigate()
+    const authData = JSON.parse(localStorage.getItem('auth'))
+    useEffect(() => {
+    if (authData) {
+        navigate('/profile'); 
+        }
+    }, [authData, navigate]);
 
     const hanleChangeFormType = () => {
         setFormData(null)
@@ -49,7 +57,7 @@ export default function Auth(){
             {formType === 'login' ? (
                 <>
                     <h1>Entrar</h1>
-                    <Button onClick={hanleChangeFormType}>Não tem uma conta? Cadastre-se</Button>
+                    <Button onClick={hanleChangeFormType} class="botao">Não tem uma conta? Cadastre-se</Button>
                     <form onSubmit={handleSubmitForm}>
                         <TextField 
                         required
@@ -65,7 +73,7 @@ export default function Auth(){
                         name="senha"
                         onChange={handleFormDataChange}
                         />
-                        <Button type="submit">Entrar</Button>
+                        <Button type="submit" class="botao">Entrar</Button>
                     </form>
                 </>
             ) : null}
@@ -79,7 +87,7 @@ export default function Auth(){
             {formType === 'signup' ? (
                 <>
                     <h1>Cadastre-se</h1>
-                    <Button onClick={hanleChangeFormType}>Já tem uma conta? Entrar</Button>
+                    <Button onClick={hanleChangeFormType} class="botao">Já tem uma conta? Entrar</Button>
                     <form onSubmit={handleSubmitForm}>
                         <TextField 
                         required
@@ -109,7 +117,7 @@ export default function Auth(){
                         name="confirmPassword"
                         onChange={handleFormDataChange}
                         />
-                        <Button type="submit">Cadastrar</Button>
+                        <Button type="submit" class="botao">Cadastrar</Button>
                     </form>
                 </>
             ) : null}

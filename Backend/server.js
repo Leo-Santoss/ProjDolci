@@ -97,6 +97,7 @@ server.post('/auth/user/login' , async (request, reply) => {
             const payload = {
                 userId: user.id,
                 nome: user.nome,
+                email: user.email,
                 tipo_acesso: user.tipo_acesso
             };
 
@@ -111,7 +112,8 @@ server.post('/auth/user/login' , async (request, reply) => {
             return reply.status(200).send({
                 success: true,
                 message: "Usuário logado com sucesso!",
-                token: token // Envia o token para o cliente
+                token: token, // Envia o token para o cliente
+                user: payload
             });
 
         } else {

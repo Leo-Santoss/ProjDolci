@@ -8,6 +8,7 @@ import Doces from './pages/doces/page.jsx'
 import Cart from './pages/cart/page.jsx'
 import Profile from './pages/profile/page.jsx'
 import Auth from './pages/auth/page.jsx'
+import Receitas from './pages/receitas/page.jsx'
 
 const pages = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const pages = createBrowserRouter([
       { path: '/cart', element: <Cart /> },
       { path: '/profile', element: <Profile /> },
       { path: '/auth', element: <Auth /> },
+      { path: '/receitas', element: <Receitas /> },
     ]
   }
 ])
