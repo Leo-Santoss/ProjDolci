@@ -12,7 +12,9 @@ CREATE TABLE produtos (
     descricao TEXT NULL,
     ingredientes TEXT NULL,
     preco NUMERIC(10, 2) NOT NULL CHECK (preco >= 0),
-    tipo_de_medida TEXT NULL
+    tipo_de_medida TEXT NULL,
+    imagem VARCHAR(255) NULL
+
 );`.then(() =>{
 
     console.log('tabela criada')

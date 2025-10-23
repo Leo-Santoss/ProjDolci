@@ -1,0 +1,51 @@
+.cardContainer {
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(230, 230, 230);
+}
+
+.tituloPagina{
+    font-size: 48px;
+    padding:20px;
+    padding-left: 10%;
+}
+
+.cadastrarDoces{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+.formularioCampos{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+.linhaQuatro{
+  display: flex;
+  gap: 10px;
+}
+
+.divBtn{
+  text-align: center;
+  width: 100%;
+  margin:20px;
+}
+
+.linhaUpload{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px
+}
+
+.imagemUpload{
+  width: 80%;
+}

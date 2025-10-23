@@ -25,11 +25,11 @@ export default function Navbar(){
 
                     <Link to={'/cart'}>
 
-                        <LuShoppingCart className={styles.navbarLink}/>
+                        <LuShoppingCart className={styles.icons}/>
                     </Link>
 
                     <Link to={'/profile'}>
-                        <LuUser className={styles.navbarLink}/>
+                        <LuUser className={styles.icons}/>
                     </Link>
                 </div>
             </div>

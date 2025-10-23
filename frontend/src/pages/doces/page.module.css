@@ -1,9 +1,12 @@
 .cardContainer {
-  padding: 100px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   background-color: rgb(230, 230, 230);
 }
 
-
-
+.tituloPagina{
+    font-size: 48px;
+    padding:20px;
+    padding-left: 10%;
+}

@@ -8,7 +8,8 @@ Content-Type: application/json
     "descricao": "Bolo top",
     "preco": 3,
     "tipo_de_medida": "fatia",
-    "ingredientes":"chocolate, leite condensado, manteiga"
+    "ingredientes":"chocolate, leite condensado, manteiga",
+    "imagem":"teste.png"
 }
 ###
 

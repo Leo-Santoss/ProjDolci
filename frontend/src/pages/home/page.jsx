@@ -4,8 +4,14 @@ import imagemDeDoces from '../../assets/images/doces_home.png';
 import imagemBolo from '../../assets/images/bolo_de_chocolate.png';
 import imagemPudim from '../../assets/images/pudim.png';
 import imagemVitrine from '../../assets/images/vitrine.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const navigate = useNavigate()
+  const btnVerMais = () => {
+    navigate('/doces');
+  };
+
   const items = [
     {
       title: "Bolos",
@@ -34,19 +40,9 @@ export default function Home() {
         </h2>
 
       <Button
-            variant="contained"
-            sx={{
-                backgroundColor: "#6d2f1c",
-                "&:hover": { backgroundColor: "#5a2414" },
-                textTransform: "none",
-                borderRadius: 1,
-                px: 3,
-                py: 1,
-                fontWeight: "bold",
-                mt: 2,
-                width: "fit-content", 
-                boxShadow: "none", 
-            }}
+              onClick={btnVerMais}
+              variant="contained"
+              class="botao"
             >
             ver mais
         </Button>
@@ -97,11 +93,9 @@ export default function Home() {
                 </CardContent>
                 <Box sx={{ p: 2 }}>
                   <Button
+                    onClick={btnVerMais}
                     variant="contained"
-                    sx={{
-                      backgroundColor: "#6d2f1c",
-                      "&:hover": { backgroundColor: "#5a2414" },
-                    }}
+                    class="botao"
                     fullWidth
                   >
                     ver mais

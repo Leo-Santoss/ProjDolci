@@ -8,6 +8,7 @@
 .logo{
     width: 5em;
     padding: 1em;
+    font-size: 46px;
 }
 
 .logo, .logo:link, .logo:visited, .logo:hover, .logo:active{
@@ -23,10 +24,16 @@
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
+    font-size:20px;
 }
 
 .navbarLink{
-    color:#7D351F
+    color:black
+}
+
+.navbarLink:hover{
+    color:#78341C;
+    transform: scale(1.1);
 }
 
 .navbarLinksContainer{
@@ -73,4 +80,20 @@
         justify-content: space-between;
         width: 100%;
     }
+}
+
+.icons{
+    color:black;
+    font-size: x-large;
+    border-radius: 40px;
+    padding:10px;
+    cursor: pointer;
+    border: 1px solid black;
+
+}
+
+.icons:hover{
+    border: 1px solid #78341C;
+    color: #78341C;
+    transform: scale(1.1);
 }

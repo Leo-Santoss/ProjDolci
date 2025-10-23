@@ -16,23 +16,24 @@ export class DatabasePostgres {
     }
 
     async create(produto){
-        const {nome, descricao, ingredientes, preco, tipo_de_medida} = produto
+        const {nome, descricao, ingredientes, preco, tipo_de_medida, imagem} = produto
 
         await sql`INSERT INTO produtos (
-        nome, descricao, ingredientes, preco, tipo_de_medida) VALUES
-        (${nome}, ${descricao},${ingredientes}, ${preco}, ${tipo_de_medida})`
+        nome, descricao, ingredientes, preco, tipo_de_medida, imagem) VALUES
+        (${nome}, ${descricao},${ingredientes}, ${preco}, ${tipo_de_medida}, ${imagem})`
 
     }
     
     async update(id, produto){
-        const {nome, descricao, ingredientes, preco, tipo_de_medida} = produto
+        const {nome, descricao, ingredientes, preco, tipo_de_medida, imagem} = produto
         
         await sql`UPDATE produtos SET
         nome = ${nome},
         descricao = ${descricao},
         ingredientes = ${ingredientes},
         preco = ${preco},
-        tipo_de_medida = ${tipo_de_medida}
+        tipo_de_medida = ${tipo_de_medida},
+        imagem = ${imagem}
         WHERE id = ${id}`
     }
 
