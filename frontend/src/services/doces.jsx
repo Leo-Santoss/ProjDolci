@@ -1,65 +1,89 @@
-// VERSÃO CORRETA
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function DocesServices(){
-    const [cadastroDocesLoading, setCadastroDocesLoading] = useState(false)
-    const navigate = useNavigate()
-    const url = 'http://localhost:3333/produtos'
+// Este hook agora gerencia todas as operações relacionadas a doces na API
+export default function DocesServices() {
+    const [loading, setLoading] = useState(false);
+    const url = 'http://localhost:3333';
 
-    const cadastrar = (formDataFromComponent) => {
-        setCadastroDocesLoading(true)
-        
+    // FUNÇÃO PARA LISTAR TODOS OS DOCES
+    const listar = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${url}/produtos`);
+            if (!response.ok) {
+                throw new Error('Falha ao buscar os dados.');
+            }
+            const data = await response.json();
+            return data;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // FUNÇÃO PARA CADASTRAR UM NOVO DOCE
+    const cadastrar = (formData, imagemFile) => {
+        setLoading(true);
         const data = new FormData();
-
-        // Adiciona todos os campos ao FormData
-        data.append('nome', formDataFromComponent.nome);
-        data.append('descricao', formDataFromComponent.descricao);
-        data.append('ingredientes', formDataFromComponent.ingredientes);
-        data.append('preco', formDataFromComponent.preco);
-        data.append('tipo_de_medida', formDataFromComponent.tipo_de_medida);
-        
-        if (formDataFromComponent.imagem) {
-            data.append('imagem', formDataFromComponent.imagem);
+        Object.keys(formData).forEach(key => data.append(key, formData[key]));
+        if (imagemFile) {
+            data.append('imagem', imagemFile);
         }
 
-        // --- CORREÇÃO PRINCIPAL AQUI ---
-        fetch(url, {
+        return fetch(`${url}/produtos`, {
             method: 'POST',
-            // REMOVA COMPLETAMENTE O OBJETO 'headers'
-            // O NAVEGADOR VAI ADICIONAR O 'Content-Type: multipart/form-data' SOZINHO
-            body: data // Envie o objeto FormData diretamente, SEM JSON.stringify
+            body: data,
+        })
+        .then(response => response.json().then(res => {
+            if (!response.ok) throw new Error(res.message);
+            return res;
+        }))
+        .finally(() => setLoading(false));
+    };
+
+    // FUNÇÃO PARA EDITAR UM DOCE EXISTENTE
+    const editar = (id, formData, imagemFile) => {
+        setLoading(true);
+        const data = new FormData();
+        Object.keys(formData).forEach(key => data.append(key, formData[key]));
+        if (imagemFile) {
+            data.append('imagem', imagemFile);
+        }
+
+        return fetch(`${url}/produtos/${id}`, {
+            method: 'PUT', // Método PUT para atualização
+            body: data,
         })
         .then(response => {
-            // É uma boa prática verificar se a resposta foi bem-sucedida
             if (!response.ok) {
-                // Isso vai nos dar mais detalhes no console se algo der errado
-                return response.json().then(err => { throw err });
+                return response.json().then(res => { throw new Error(res.message) });
             }
-            return response.json();
+            // PUT com sucesso geralmente retorna 204 No Content, que não tem corpo
+            return { success: true, message: 'Atualizado com sucesso!' };
         })
-        .then((result) => {
-            console.log(result);
-            // Assumindo que seu backend retorna { success: true }
-            if(result.success){
-                navigate('/doces');
-            }
-        })
-        .catch((error) => {
-            // O erro que você viu aparecerá aqui agora
-            console.error("Erro detalhado do servidor:", error);
-        })
-        .finally(() => {
-            setCadastroDocesLoading(false);
-        });
-    }
-
-    // ... o resto do seu código ...
+        .finally(() => setLoading(false));
+    };
     
-    return{
-        cadastrar,
-        // editar, // Lembre-se que editar também precisará ser ajustado se for alterar a imagem
-        cadastroDocesLoading
+    // FUNÇÃO PARA EXCLUIR UM DOCE
+    const excluir = (id) => {
+        setLoading(true);
+        return fetch(`${url}/produtos/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+             if (!response.ok) {
+                return response.json().then(res => { throw new Error(res.message) });
+            }
+            return { success: true, message: 'Excluído com sucesso!' };
+        })
+        .finally(() => setLoading(false));
     }
-}
 
+
+    return {
+        loading,
+        listar,
+        cadastrar,
+        editar,
+        excluir,
+    };
+}
