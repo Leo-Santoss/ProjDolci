@@ -16,7 +16,7 @@ export default function Navbar(){
         <nav className={styles.navbarContainer}>
             <div className={styles.navbarItems}>
                 <Link to={'/'}>
-                    <h1 className={styles.logo}>Dolci</h1>
+                    <h1 className={styles.logo}>DOLCI</h1>
                 </Link>
                 <div className={styles.navbarLinksContainer}>
                     
@@ -24,7 +24,6 @@ export default function Navbar(){
                     <Link to={'/doces'} className={styles.navbarLink}>Doces</Link>
 
                     <Link to={'/cart'}>
-
                         <LuShoppingCart className={styles.icons}/>
                     </Link>
 

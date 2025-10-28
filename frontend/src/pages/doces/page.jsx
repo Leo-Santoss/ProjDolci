@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DocesServices from "../../services/doces";
 import ReceitasServices from "../../services/ReceitasServices";
 import CarrinhoServices from "../../services/CarrinhoServices";
+import imgReceita from "../../assets/images/receitas.png";
 
 // Componente para as estrelas de avaliação
 const RatingStars = ({ rating }) => {
@@ -127,42 +128,44 @@ export default function Doces() {
     if (selectedProduct) {
         return (
             <div className={styles.container}>
-                <Button onClick={handleBackToList} sx={{ mb: 2 }}>&larr; Voltar para a lista</Button>
-                <Grid container spacing={4}>
-                    <Grid item xs={12} md={6}>
-                        <CardMedia
-                            component="img"
-                            image={`http://localhost:3333/uploads/${selectedProduct.imagem}`}
-                            alt={selectedProduct.nome}
-                            sx={{ width: '100%', borderRadius: 2, objectFit: 'cover' }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                        <Typography variant="h4" component="h1" gutterBottom>{selectedProduct.nome}</Typography>
-                        <Typography variant="h5" color="primary" sx={{ mb: 2 }}>R$ {parseFloat(selectedProduct.preco).toFixed(2)}</Typography>
-                        <Typography variant="body1" sx={{ mb: 2 }}><strong>Descrição:</strong> {selectedProduct.descricao}</Typography>
-                        <Typography variant="body1" sx={{ mb: 3 }}><strong>Ingredientes:</strong> {selectedProduct.ingredientes}</Typography>
-                        
-                        <Grid container spacing={2} sx={{ mb: 3 }}>
-                            <Grid item xs={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel>Tamanho</InputLabel>
-                                    <Select value={tamanho} label="Tamanho" onChange={(e) => setTamanho(e.target.value)}>
-                                        <MenuItem value="pequeno">Pequeno</MenuItem>
-                                        <MenuItem value="normal">Normal</MenuItem>
-                                        <MenuItem value="grande">Grande</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel>Quantidade</InputLabel>
-                                    <Select value={quantidade} label="Quantidade" onChange={(e) => setQuantidade(e.target.value)}>
-                                        {[...Array(10).keys()].map(n => <MenuItem key={n+1} value={n+1}>{n+1}</MenuItem>)}
-                                    </Select>
-                                </FormControl>
-                            </Grid>
+                <div className={styles.cabecalho}>
+                    <Button onClick={handleBackToList} class="botao" sx={{ mb: 2 }}>&larr;</Button>
+                    <h1 className={styles.tituloPagina}>{selectedProduct.nome}</h1>
+                </div>
+                <Grid className={styles.gridProdutoSelecionado}>
+                    <div className={styles.divEsquerda}>
+                        <Grid className={styles.divImgProduto}>
+                            <CardMedia
+                                component="img"
+                                image={`http://localhost:3333/uploads/${selectedProduct.imagem}`}
+                                alt={selectedProduct.nome}
+                                className={styles.imgProduto}
+                            />
                         </Grid>
+                        <div className={styles.divPersonalizacao}>
+                            <h1 className={styles.tituloPersonalizacao}>Personalização</h1>
+                            <FormControl fullWidth>
+                                <InputLabel>Quantidade</InputLabel>
+                                <Select value={quantidade} label="Quantidade" onChange={(e) => setQuantidade(e.target.value)}>
+                                    {[...Array(10).keys()].map(n => <MenuItem key={n+1} value={n+1}>{n+1}</MenuItem>)}
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel>Tamanho</InputLabel>
+                                <Select value={tamanho} label="Tamanho" onChange={(e) => setTamanho(e.target.value)}>
+                                    <MenuItem value="pequeno">Pequeno</MenuItem>
+                                    <MenuItem value="normal">Normal</MenuItem>
+                                    <MenuItem value="grande">Grande</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </div>
+                    <Grid className={styles.campos}>
+                        <Typography className={styles.campoDescricao}>{selectedProduct.descricao}</Typography>
+                        <Typography className={styles.campoIngredientes}><strong>Ingredientes:</strong> {selectedProduct.ingredientes}</Typography>
+                        
+                        <Typography  className={styles.campoPreco}>R$ {parseFloat(selectedProduct.preco).toFixed(2)}/{selectedProduct.tipo_de_medida}</Typography>
+                        
                         
                         <Button
                             variant="contained"
@@ -171,13 +174,17 @@ export default function Doces() {
                             disabled={addingToCart}
                             size="large"
                             fullWidth
+                            class="botao"
                             sx={{ mb: 2 }}
                         >
                             {addingToCart ? 'Adicionando...' : 'Adicionar ao Carrinho'}
                         </Button>
-                        <Button variant="outlined" onClick={handleShowRecipe} size="large" fullWidth>
-                            Quer fazer em casa?
-                        </Button>
+                        <div className={styles.divFazerEmCasa}>
+                            <h1 className={styles.tituloReceitas}>Quer fazer em casa? <img src={imgReceita} className={styles.imgReceitaEstilo} alt="receita" /></h1>
+                            <Button variant="outlined" onClick={handleShowRecipe} size="large" className={styles.botaoFazerEmCasa} fullWidth>
+                                Ver Receita
+                            </Button>
+                        </div>
                     </Grid>
                 </Grid>
 

@@ -42,14 +42,9 @@ export default function Profile() {
                         <h1>Página do Colaborador</h1>
 
                         <div className={styles.acoesColaborador}>
-                            <Link to={'/registrarreceitas'}>
-                                <Button variant="contained" class="botao" >
-                                    Cadastrar Receitas
-                                </Button>
-                            </Link>
                             <Link to={'/registrardoces'}>
                                 <Button variant="contained" class="botao" >
-                                    Cadastrar Doces
+                                    Gerenciar Doces
                                 </Button>
                             </Link>
                         </div>

@@ -155,30 +155,32 @@ export default function RegistrarDoces() {
     if (modo === 'LISTA') {
         return (
             <div className={styles.container}>
-                <h1 className={styles.tituloPagina}>Gerenciar Produtos</h1>
-                <Box sx={{ mb: 2 }}>
-                    <Button variant="contained" style={{ backgroundColor: "#094848" }} onClick={handleAbrirFormCadastroProduto}>
-                        Cadastrar Novo Doce
+                <div className={styles.tituloGerenciar}>
+                    <h1 className={styles.tituloPagina}>Gerenciar Produtos</h1>
+                    <Button class="botao" variant="contained" style={{ backgroundColor: "#094848" }} onClick={handleAbrirFormCadastroProduto}>
+                        Cadastrar Novo Produto
                     </Button>
-                </Box>
-                <List>
-                    {doces.map((doce) => (
-                        <ListItem key={doce.id} divider>
-                            <ListItemText primary={doce.nome} secondary={`Preço: R$ ${doce.preco}`} />
-                            <ListItemSecondaryAction>
-                                <IconButton edge="end" title="Editar Receita" onClick={() => handleAbrirFormReceita(doce)}>
-                                    <MenuBookIcon />
-                                </IconButton>
-                                <IconButton edge="end" title="Editar Produto" onClick={() => handleAbrirFormEdicaoProduto(doce)}>
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton edge="end" title="Excluir Produto" onClick={() => handleProdutoDelete(doce.id)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    ))}
-                </List>
+                </div>
+                <div className={styles.divLista}>
+                    <List>
+                        {doces.map((doce) => (
+                            <ListItem key={doce.id} divider>
+                                <ListItemText primary={doce.nome} secondary={`Preço: R$ ${doce.preco}`} />
+                                <ListItemSecondaryAction>
+                                    <IconButton edge="end" title="Editar Receita" onClick={() => handleAbrirFormReceita(doce)}>
+                                        <MenuBookIcon />
+                                    </IconButton>
+                                    <IconButton edge="end" title="Editar Produto" onClick={() => handleAbrirFormEdicaoProduto(doce)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton edge="end" title="Excluir Produto" onClick={() => handleProdutoDelete(doce.id)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
             </div>
         );
     }
@@ -187,8 +189,8 @@ export default function RegistrarDoces() {
     if (modo === 'FORM_PRODUTO') {
         return (
            <div className={styles.container}>
+                <h1 className={styles.tituloPagina}>{produtoFormData.id ? 'Editar Produto' : 'Cadastrar Novo Produto'}</h1>
                 <form onSubmit={handleProdutoSubmit}>
-                    <h2>{produtoFormData.id ? 'Editar Produto' : 'Cadastrar Novo Produto'}</h2>
                     <div className={styles.cadastrarDoces}>
                          <div className={styles.formularioCampos}>
                             <TextField fullWidth required label="Nome" name="nome" value={produtoFormData.nome} onChange={handleProdutoFormChange} sx={{ mb: 2 }} />
@@ -200,22 +202,23 @@ export default function RegistrarDoces() {
                             </Box>
                          </div>
                          <div className={styles.linhaUpload}>
-                            <Button component="label" variant="contained" startIcon={<LuCloudUpload />} style={{ backgroundColor: "#094848" }}>
-                                Enviar imagem
-                                <VisuallyHiddenInput type="file" accept="image/*" onChange={handleProdutoFileChange} />
-                            </Button>
+                            <div className={styles.fundoBotaoProduto}>
+                                <Button className={styles.botaoFotoProduto} component="label" variant="contained" startIcon={<LuCloudUpload />} style={{ backgroundColor: "#094848" }}>
+                                    Enviar imagem
+                                    <VisuallyHiddenInput type="file" accept="image/*" onChange={handleProdutoFileChange} />
+                                </Button>
+                            </div>
                             {produtoFileName && <Typography variant="body1" sx={{ ml: 2 }}>{produtoFileName}</Typography>}
                          </div>
                     </div>
-                    
-                    <Box className={styles.divBtn} sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                        <Button type="submit" variant="contained" style={{width:"20%"}} disabled={loading}>
+                    <div className={styles.divBotoes}>    
+                        <Button class="botao" type="submit" variant="contained" style={{width:"20%"}} disabled={loading}>
                             {loading ? <CircularProgress size={24} /> : (produtoFormData.id ? 'Salvar Alterações' : 'Cadastrar')}
                         </Button>
-                        <Button variant="outlined" style={{width:"20%"}} onClick={handleCancelar}>
+                        <Button class="botao" variant="outlined" style={{width:"20%"}} onClick={handleCancelar}>
                             Cancelar
                         </Button>
-                    </Box>
+                    </div>
                 </form>
            </div>
         );
@@ -225,42 +228,49 @@ export default function RegistrarDoces() {
     if (modo === 'FORM_RECEITA') {
         return (
             <div className={styles.container}>
-                <form onSubmit={handleReceitaSubmit}>
-                    <Typography variant="h4" component="h1" gutterBottom>
-                        {receitaFormData.id ? 'Editar Receita' : 'Cadastrar Nova Receita'}
-                    </Typography>
-                    
-                    <TextField label="Ingredientes" name="ingredientes" value={receitaFormData.ingredientes} onChange={handleReceitaFormChange} fullWidth multiline rows={6} margin="normal" required />
-                    <TextField label="Modo de Preparo" name="modo_de_preparo" value={receitaFormData.modo_de_preparo} onChange={handleReceitaFormChange} fullWidth multiline rows={8} margin="normal" required />
-                    
-                    <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
-                        <TextField 
-                            label="Tempo de Preparo (minutos)" 
-                            name="tempo_preparo_minutos" 
-                            value={receitaFormData.tempo_preparo_minutos} 
-                            onChange={handleReceitaFormChange} 
-                            fullWidth 
-                            required 
-                            type="number" 
-                        />
-                        <TextField label="Rendimento (ex: 8 porções)" name="rendimento" value={receitaFormData.rendimento} onChange={handleReceitaFormChange} fullWidth required />
-                    </Box>
+                <h1 className={styles.tituloPagina}>
+                    {receitaFormData.id ? 'Editar Receita' : 'Cadastrar Nova Receita'}
+                </h1>
+                <form className={styles.form} onSubmit={handleReceitaSubmit}>
+                    <div className={styles.ladoUm}>
+                        <TextField label="Ingredientes" name="ingredientes" value={receitaFormData.ingredientes} onChange={handleReceitaFormChange} fullWidth multiline rows={6} margin="normal" required />
+                        <TextField label="Modo de Preparo" name="modo_de_preparo" value={receitaFormData.modo_de_preparo} onChange={handleReceitaFormChange} fullWidth multiline rows={8} margin="normal" required />
+                        
+                        <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                            <TextField 
+                                label="Tempo de Preparo (minutos)" 
+                                name="tempo_preparo_minutos" 
+                                value={receitaFormData.tempo_preparo_minutos} 
+                                onChange={handleReceitaFormChange} 
+                                fullWidth 
+                                required 
+                                type="number" 
+                            />
+                            <TextField label="Rendimento (ex: 8 porções)" name="rendimento" value={receitaFormData.rendimento} onChange={handleReceitaFormChange} fullWidth required />
+                        </Box>
+                    </div>
+                    <div className={styles.ladoDois}>
+                        <Box sx={{ display: 'flex', gap: 4, mt: 1, flexDirection: 'column', alignItems: 'center' }}>
+                            <div className={styles.fundoBotao}>
+                                <Button className={styles.botaoFoto} variant="outlined" component="label">Imagem 1<input type="file" name="imagem_passo1" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
+                            </div>
+                            <div className={styles.fundoBotao}>
+                                <Button className={styles.botaoFoto} variant="outlined" component="label">Imagem 2<input type="file" name="imagem_passo2" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
+                            </div>
+                            <div className={styles.fundoBotao}>
+                                <Button className={styles.botaoFoto} variant="outlined" component="label">Imagem 3<input type="file" name="imagem_passo3" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
+                            </div>
+                            <Typography>{Object.values(receitaFiles).filter(f => f).map(f => f.name).join(', ')}</Typography>
+                        </Box>
 
-                    <Typography variant="h6" sx={{ mt: 3 }}>Imagens do Passo-a-Passo</Typography>
-                    <Box sx={{ display: 'flex', gap: 3, mt: 1 }}>
-                        <Button variant="outlined" component="label">Passo 1<input type="file" name="imagem_passo1" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
-                        <Button variant="outlined" component="label">Passo 2<input type="file" name="imagem_passo2" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
-                        <Button variant="outlined" component="label">Passo 3<input type="file" name="imagem_passo3" hidden onChange={handleReceitaFileChange} accept="image/*" /></Button>
-                    </Box>
-                    <Typography variant="caption">{Object.values(receitaFiles).filter(f => f).map(f => f.name).join(', ')}</Typography>
-
-                    <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-                        <Button type="submit" variant="contained" disabled={loading}>
-                            {loading ? <CircularProgress size={24} /> : 'Salvar Receita'}
-                        </Button>
-                        <Button variant="outlined" onClick={handleCancelar}>Cancelar</Button>
-                    </Box>
+                    </div>
                 </form>
+                <Box sx={{ mt: 4, display: 'flex', gap: 2, alignContent: 'center', justifyContent: 'center'}} fullWidth>
+                    <Button class="botao" type="submit" variant="contained" disabled={loading}>
+                        {loading ? <CircularProgress size={24} /> : 'Salvar Receita'}
+                    </Button>
+                    <Button class="botao" variant="outlined" onClick={handleCancelar}>Cancelar</Button>
+                </Box>
             </div>
         );
     }

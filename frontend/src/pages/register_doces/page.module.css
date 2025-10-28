@@ -1,3 +1,29 @@
+.container{
+  text-align: left;
+  padding: 20px;
+}
+
+.form{
+  margin-left:4%;
+  margin-right:4%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+}
+
+.tituloGerenciar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10%;
+}
+
+.divLista{
+  margin:4%;
+}
+
 .cardContainer {
   padding: 100px;
   display: flex;
@@ -7,6 +33,12 @@
 
 .tituloPagina{
     font-size: 48px;
+    padding:20px;
+    padding-left: 10%;
+}
+
+.tituloImagensPasso{
+  font-size: 30px;
     padding:20px;
     padding-left: 10%;
 }
@@ -25,6 +57,7 @@
   display: flex;
   flex-direction: column;
   gap:20px;
+  justify-content: center;
 }
 
 .linhaQuatro{
@@ -48,4 +81,66 @@
 
 .imagemUpload{
   width: 80%;
+}
+
+.divBotoes{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding:20px;
+}
+
+.ladoUm{
+  width: 50%;
+}
+
+.ladoDois{
+  width: 50%;
+}
+
+.botaoFoto{
+  background-color: #094848 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: none !important; /* Remove o 'uppercase' padrão do MUI */
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease;
+  width:fit-content;
+  border: none;
+}
+
+.fundoBotao{
+  display: flex;
+  width: 180px;
+  height: 160px;
+  border-radius: 20px;
+  background-color: #D9795A;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.botaoFotoProduto{
+  background-color: #094848 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: none !important; /* Remove o 'uppercase' padrão do MUI */
+  padding: 20px 30px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease;
+  width:fit-content;
+  border: none;
+}
+
+.fundoBotaoProduto{
+  font-size: 30px;
+  display: flex;
+  width: 280px;
+  height: 260px;
+  border-radius: 20px;
+  background-color: #D9795A;
+  justify-content: center;
+  align-items: center;
 }
