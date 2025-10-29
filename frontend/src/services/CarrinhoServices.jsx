@@ -68,10 +68,16 @@ export default function CarrinhoServices() {
     
     // Remove um item do carrinho
     const removerItem = async (itemId) => {
+        // 1. Pega os headers padrão (incluindo Auth e Session ID)
         const { headers } = getIdentifiers();
+
+        // 2. CORREÇÃO: Remove o header 'Content-Type' pois não estamos enviando um corpo
+        delete headers['Content-Type'];
+
+        // 3. Faz a requisição DELETE agora com os headers corretos
         return fetch(`${url}/carrinho/itens/${itemId}`, {
             method: 'DELETE',
-            headers
+            headers // Envia os headers já modificados
         });
     };
 

@@ -1,0 +1,19 @@
+.botaoFazerEmCasa{
+  background-color: #094848 !important;
+  border: none;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: none !important; /* Remove o 'uppercase' padrão do MUI */
+  padding: 20px 30px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease;
+  width:100%;
+  border: none;
+  cursor: pointer;
+}
+
+.tituloPagina{
+  font-size: 48px;
+  padding:20px;
+  text-align: center;
+}

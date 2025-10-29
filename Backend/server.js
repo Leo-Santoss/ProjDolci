@@ -36,7 +36,7 @@ server.register(fastifyCors, {
 server.register(fastifyMultipart, {
   limits: {
     fieldNameSize: 100, // Max field name size in bytes
-    fieldSize: 100,     // Max field value size in bytes
+    fieldSize: 100000,     // Max field value size in bytes
     fields: 10,         // Max number of non-file fields
     fileSize: 10 * 1024 * 1024, // For multipart forms, the max file size in bytes (here, 10MB)
     files: 5,           // Max number of file fields

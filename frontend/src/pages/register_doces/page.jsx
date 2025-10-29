@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { styled } from '@mui/material/styles';
 import { LuCloudUpload } from "react-icons/lu"; // Adicionando import que faltava
+import Swal from 'sweetalert2'
 
 import styles from './page.module.css';
 import DocesServices from "../../services/doces";
@@ -51,7 +52,12 @@ export default function RegistrarDoces() {
             setDoces(data);
         } catch (error) {
             console.error("Erro ao buscar doces:", error);
-            alert("Não foi possível carregar a lista de doces.");
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível carregar a lista de doces!',
+                icon: 'error',
+                confirmButtonText: 'ok'
+            })
         } finally {
             setListLoading(false);
         }
@@ -82,7 +88,13 @@ export default function RegistrarDoces() {
             }
             setModo('FORM_RECEITA');
         } catch (error) {
-            alert(`Erro ao buscar receita: ${error.message}`);
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Erro ao buscar receita!',
+                icon: 'error',
+                confirmButtonText: 'ok'
+            })
+            console.log(error.message);
         }
     };
     
@@ -106,20 +118,42 @@ export default function RegistrarDoces() {
             : cadastrar(produtoFormData, produtoImagemFile);
         
         promise.then(() => {
-            alert(`Produto ${produtoFormData.id ? 'atualizado' : 'cadastrado'} com sucesso!`);
+            Swal.fire({
+                title: 'Sucesso!',
+                text: `Produto ${produtoFormData.id ? 'atualizado' : 'cadastrado'} com sucesso!`,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
             setModo('LISTA');
             fetchDoces();
         }).catch(error => {
-            alert(`Erro ao salvar produto: ${error.message}`);
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Erro ao salvar produto!',
+                icon: 'error',
+                confirmButtonText: 'ok'
+            })
+            console.log(error.message);
         });
     };
     const handleProdutoDelete = (id) => {
         if (window.confirm("Tem certeza que deseja excluir este produto?")) {
             excluir(id).then(() => {
-                alert("Produto excluído com sucesso!");
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: `Produto excluído com sucesso!`,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
                 fetchDoces();
             }).catch(error => {
-                 alert(`Erro ao excluir produto: ${error.message}`);
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao excluir produto!',
+                    icon: 'error',
+                    confirmButtonText: 'ok'
+                })
+                 console.log(error.message);
             });
         }
     };
@@ -138,17 +172,29 @@ export default function RegistrarDoces() {
         e.preventDefault();
         salvarReceita(receitaFormData, receitaFiles)
             .then(() => {
-                alert('Receita salva com sucesso!');
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: `Receita salva com sucesso!`,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
                 setModo('LISTA');
             })
             .catch(error => {
-                alert(`Erro ao salvar receita: ${error.message}`);
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao salvar receita!',
+                    icon: 'error',
+                    confirmButtonText: 'ok'
+                })
+                console.log(error.message);
             });
     };
 
     // --- RENDERIZAÇÃO ---
-    if (listLoading) { return <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}><CircularProgress /></Box>; }
-
+    if (listLoading) { 
+        return <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}><CircularProgress /></Box>; 
+    }
     const loading = loadingDoces || loadingReceitas;
 
     // ----- MODO LISTA -----
@@ -274,4 +320,6 @@ export default function RegistrarDoces() {
             </div>
         );
     }
+    
+    return null;
 }

@@ -1,5 +1,6 @@
 .cardContainer {
-  padding: 20px;
+  padding-left: 6%;
+  padding-right: 6%;
   display: flex;
   justify-content: center;
   background-color: rgb(230, 230, 230);
@@ -11,6 +12,11 @@
   margin-left:10%;
 }
 
+.tituloDoce{
+  font-size: 48px;
+  padding:20px;
+}
+
 .gridProdutoSelecionado{
   display: flex;
 }
@@ -18,7 +24,7 @@
 .tituloPagina{
   font-size: 48px;
   padding:20px;
-  padding-left: 10%;
+  text-align: center;
 }
 
 .divImgProduto{
@@ -46,9 +52,49 @@
   font-size: 24px;
 }
 
-
 .divEsquerda{
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap:60px;
+  padding: 4%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.divDireita{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:60px;
+  padding: 4%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.divEsquerdaCima{
+  height: 50%;
+}
+
+.divEsquerdaBaixo{
+  height: 50%;
+}
+
+.divDireitaCima{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+  height: 50%;
+}
+
+.divDireitaCima{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+  height: 50%;
 }
 
 .campos{
@@ -60,8 +106,8 @@
 }
 
 .divFazerEmCasa{
-  width: 260px;
-  height: 260px;
+  width: 360px;
+  height: 220px;
   background-color: #7D351F;
   border-radius: 20px;
   display: flex;
@@ -73,8 +119,12 @@
 }
 
 .tituloReceitas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
   color:white;
+  gap:10px;
 }
 
 .imgReceitaEstilo{
@@ -98,4 +148,90 @@
 
 .botaoFazerEmCasa:hover{
   transform: scale(1.05);
+}
+
+.botaoAdicionar{
+  background-color: #7D351F !important;
+  border: none;
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: none !important; /* Remove o 'uppercase' padrão do MUI */
+  padding: 20px 30px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease;
+  width:fit-content;
+  border: none;
+  cursor: pointer;
+}
+
+.botaoAdicionar:hover{
+  transform: scale(1.05);
+}
+
+.campoDescricao{
+  width: 500px;
+  text-align: center;
+}
+
+.campoIngredientes{
+  color: #828282;
+  width: 500px;
+  text-align: center;
+}
+
+
+.modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  box-Shadow: 24;
+  max-Height: 90vh;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.tituloModal{
+  width: 100%;
+  font-size: 48px;
+  padding:20px;
+  padding-top:0;
+  text-align: center;
+}
+
+.infoReceita{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.conteudoModal{
+  display: flex;
+}
+
+.ladoEsquerdoModal{
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+.ladoDireitoModal{
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+}
+
+.imagemPassos{
+  width: 200px;
+  height: 200px;
+  border-radius: 20px
 }

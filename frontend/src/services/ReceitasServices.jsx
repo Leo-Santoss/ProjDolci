@@ -5,24 +5,24 @@ export default function ReceitasServices() {
     const url = 'http://localhost:3333';
 
     // Busca a receita de um produto específico
-    
+
     const getByProdutoId = async (id_produto) => {
         setLoading(true);
         try {
             const response = await fetch(`${url}/receitas/produto/${id_produto}`);
 
-            // 1. PRIMEIRO, checamos o caso de SUCESSO (status 200)
+            // 1. CASO DE SUCESSO: Se a resposta for OK (status 200), a receita foi encontrada.
             if (response.ok) {
-                return await response.json(); // Se encontrou, retorna a receita
+                return await response.json(); 
             }
 
-            // 2. DEPOIS, checamos o caso ESPERADO de "não encontrado"
+            // 2. CASO ESPERADO: Se a resposta for 404, a receita não existe.
             if (response.status === 404) {
-                return null; // Se não encontrou, retorna null para o formulário ficar em branco
+                return null; // Retornamos 'null' para indicar ao componente que o formulário deve vir em branco.
             }
             
-            // 3. SE NÃO FOR NENHUM DOS ANTERIORES, aí sim é um erro inesperado
-            throw new Error('Falha ao buscar a receita no servidor.');
+            // 3. CASO DE ERRO REAL: Se for qualquer outro erro (como 500), aí sim lançamos uma exceção.
+            throw new Error('Falha inesperada ao buscar a receita no servidor.');
 
         } finally {
             setLoading(false);

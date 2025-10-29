@@ -5,10 +5,15 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom'; // Se você usa react-router
+import Swal from 'sweetalert2'
+import styles from './page.module.css'
 
 import CarrinhoServices from '../../services/CarrinhoServices';
 
 export default function Cart() {
+
+    
+
     const { loading, getItensDoCarrinho, removerItem, atualizarQuantidadeItem } = CarrinhoServices();
     const [itens, setItens] = useState([]);
 
@@ -26,10 +31,27 @@ export default function Cart() {
     }, [itens]);
 
     // Funções para interagir com os itens (atualmente fictícias)
-    const handleRemoverItem = (itemId) => {
-        // Lógica real: Chamar a API e depois atualizar o estado
-        removerItem(itemId);
-        setItens(prevItens => prevItens.filter(item => item.id !== itemId));
+    const handleRemoverItem = async (itemId) => {
+        // Confirmação opcional, mas recomendada
+        if (!window.confirm("Tem certeza que deseja remover este item do carrinho?")) {
+            return;
+        }
+
+        try {
+            // 1. Chama a API e ESPERA pela resposta
+            await removerItem(itemId);
+
+            // 2. Se a chamada foi bem-sucedida, ATUALIZA o estado local para remover o item da tela
+            setItens(prevItens => prevItens.filter(item => item.id !== itemId));
+
+            // Você pode adicionar uma notificação de sucesso aqui se desejar
+            // alert("Item removido com sucesso!");
+
+        } catch (error) {
+            // 3. Se a chamada falhar, mostra um erro para o usuário
+            console.error("Falha ao remover o item:", error);
+            alert("Não foi possível remover o item do carrinho. Tente novamente.");
+        }
     };
 
     const handleQuantidadeChange = (itemId, novaQuantidade) => {
@@ -48,9 +70,9 @@ export default function Cart() {
 
     return (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Typography variant="h4" component="h1" gutterBottom>
+            <h1 className={styles.tituloPagina}>
                 Meu Carrinho
-            </Typography>
+            </h1>
 
             {itens.length === 0 ? (
                 <Paper sx={{ p: 3, textAlign: 'center' }}>
@@ -111,11 +133,17 @@ export default function Cart() {
                                 <Typography variant="h6">R$ {subtotal.toFixed(2)}</Typography>
                             </Box>
                             <Button
-                                variant="contained"
+                                className={styles.botaoFazerEmCasa}
                                 size="large"
                                 fullWidth
                                 sx={{ mt: 3 }}
-                                onClick={() => alert('Ação de finalizar compra ainda não implementada.')} // Ação fictícia
+                                onClick={() => 
+                                    Swal.fire({
+                                            title: 'Aviso!',
+                                            text: `Ação de finalizar compra ainda não implementada!`,
+                                            icon: 'warning',
+                                            confirmButtonText: 'Ok'
+                                        })} // Ação fictícia
                             >
                                 Finalizar Compra
                             </Button>
