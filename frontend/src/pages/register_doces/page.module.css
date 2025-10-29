@@ -22,6 +22,7 @@
 
 .divLista{
   margin:4%;
+  margin-top: 0;
 }
 
 .cardContainer {
@@ -143,4 +144,9 @@
   background-color: #D9795A;
   justify-content: center;
   align-items: center;
+}
+
+.listaBotoes{
+  display: flex;
+  gap:10px;
 }

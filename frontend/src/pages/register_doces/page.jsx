@@ -212,15 +212,15 @@ export default function RegistrarDoces() {
                         {doces.map((doce) => (
                             <ListItem key={doce.id} divider>
                                 <ListItemText primary={doce.nome} secondary={`Preço: R$ ${doce.preco}`} />
-                                <ListItemSecondaryAction>
+                                <ListItemSecondaryAction className={styles.listaBotoes}>
                                     <IconButton edge="end" title="Editar Receita" onClick={() => handleAbrirFormReceita(doce)}>
-                                        <MenuBookIcon />
+                                        <MenuBookIcon sx={{color: "#094848"}}/>
                                     </IconButton>
                                     <IconButton edge="end" title="Editar Produto" onClick={() => handleAbrirFormEdicaoProduto(doce)}>
-                                        <EditIcon />
+                                        <EditIcon sx={{color: "green"}}/>
                                     </IconButton>
                                     <IconButton edge="end" title="Excluir Produto" onClick={() => handleProdutoDelete(doce.id)}>
-                                        <DeleteIcon />
+                                        <DeleteIcon sx={{color: "darkred"}}/>
                                     </IconButton>
                                 </ListItemSecondaryAction>
                             </ListItem>
@@ -277,7 +277,7 @@ export default function RegistrarDoces() {
                 <h1 className={styles.tituloPagina}>
                     {receitaFormData.id ? 'Editar Receita' : 'Cadastrar Nova Receita'}
                 </h1>
-                <form className={styles.form} onSubmit={handleReceitaSubmit}>
+                <form id="recipe-form" className={styles.form} onSubmit={handleReceitaSubmit}>
                     <div className={styles.ladoUm}>
                         <TextField label="Ingredientes" name="ingredientes" value={receitaFormData.ingredientes} onChange={handleReceitaFormChange} fullWidth multiline rows={6} margin="normal" required />
                         <TextField label="Modo de Preparo" name="modo_de_preparo" value={receitaFormData.modo_de_preparo} onChange={handleReceitaFormChange} fullWidth multiline rows={8} margin="normal" required />
@@ -312,7 +312,7 @@ export default function RegistrarDoces() {
                     </div>
                 </form>
                 <Box sx={{ mt: 4, display: 'flex', gap: 2, alignContent: 'center', justifyContent: 'center'}} fullWidth>
-                    <Button class="botao" type="submit" variant="contained" disabled={loading}>
+                    <Button form="recipe-form" className="botao" type="submit" variant="contained" disabled={loading}>
                         {loading ? <CircularProgress size={24} /> : 'Salvar Receita'}
                     </Button>
                     <Button class="botao" variant="outlined" onClick={handleCancelar}>Cancelar</Button>

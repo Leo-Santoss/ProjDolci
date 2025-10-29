@@ -19,3 +19,13 @@
     width: 100%;
 }
 
+.gridCards{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.gridCard{
+    width: 30%;
+}

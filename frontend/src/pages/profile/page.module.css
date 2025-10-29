@@ -9,7 +9,6 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
-    padding: 20px;
 }
 
 /* perfil */
@@ -20,6 +19,7 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
+    padding: 20px;
 }
 
 .campoTexto{
@@ -47,6 +47,7 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
+    padding: 20px;
 }
 
 .acoesColaborador{

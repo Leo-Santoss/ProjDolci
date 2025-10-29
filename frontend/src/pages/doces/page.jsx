@@ -278,12 +278,10 @@ export default function Doces() {
                                     <Divider light />
                                     <Box sx={{ p: 1.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
                                         <Box>
-                                            <RatingStars rating={item.rating} />
                                             <Typography variant="body1" sx={{ mt: 0.5, fontWeight: 700 }}>
                                                 R$ {parseFloat(item.preco).toFixed(2)} / {item.tipo_de_medida}
                                             </Typography>
                                         </Box>
-                                        <IconButton aria-label="Adicionar aos favoritos"><MdFavorite fontSize="small" /></IconButton>
                                     </Box>
                                 </Card>
                             </Grid>

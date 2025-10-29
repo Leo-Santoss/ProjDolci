@@ -41,7 +41,6 @@ export class DatabasePostgresReceitas {
 
     async update(id, receita) {
         const { id_produto, ingredientes, modo_de_preparo, tempo_preparo_minutos, rendimento, imagem_passo1, imagem_passo2, imagem_passo3 } = receita;
-        // CORREÇÃO: Removido o ')' extra no final da query
         await sql`UPDATE receitas SET
             id_produto = ${id_produto},
             ingredientes = ${ingredientes},
@@ -57,4 +56,6 @@ export class DatabasePostgresReceitas {
     async delete(id) {
         await sql`DELETE FROM receitas WHERE id = ${id}`;
     }
+
+    
 }

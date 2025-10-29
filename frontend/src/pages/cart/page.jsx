@@ -1,18 +1,15 @@
-// src/pages/Carrinho/CarrinhoPage.jsx
 import { useState, useEffect, useMemo } from 'react';
 import { Container, Typography, Box, Grid, Paper, Button, IconButton, CircularProgress, Divider, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom'; // Se você usa react-router
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import styles from './page.module.css'
 
 import CarrinhoServices from '../../services/CarrinhoServices';
 
 export default function Cart() {
-
-    
 
     const { loading, getItensDoCarrinho, removerItem, atualizarQuantidadeItem } = CarrinhoServices();
     const [itens, setItens] = useState([]);

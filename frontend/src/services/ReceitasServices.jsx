@@ -66,6 +66,7 @@ export default function ReceitasServices() {
         .finally(() => setLoading(false));
     };
 
+
     return {
         loading,
         getByProdutoId,

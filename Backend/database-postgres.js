@@ -40,4 +40,18 @@ export class DatabasePostgres {
     async delete(id){
         await sql`DELETE FROM produtos WHERE id = ${id}`
     }
+
+    async listWithRecipes() {
+        try {
+            const produtos = await sql`
+                SELECT DISTINCT p.* FROM produtos p
+                INNER JOIN receitas r ON p.id = r.id_produto
+                ORDER BY p.nome ASC
+            `;
+            return produtos;
+        } catch (error) {
+            console.error("ERRO na query SQL 'listWithRecipes':", error);
+            throw new Error("Falha ao executar a consulta de produtos com receitas.");
+        }
+    }
 }

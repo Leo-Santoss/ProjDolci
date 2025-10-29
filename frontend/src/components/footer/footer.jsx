@@ -2,15 +2,25 @@ import styles from './footer.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, Container, Grid, Typography, IconButton, Button } from '@mui/material';
 import { LuFacebook, LuInstagram, LuYoutube, LuLinkedin } from "react-icons/lu";
+import { useEffect } from 'react';
 
 export default function Footer() {
     
+    const authData = JSON.parse(localStorage.getItem('auth'))
     const navigate = useNavigate();
 
     const goLogin = () => {
         navigate('/auth');
     };
 
+    
+  useEffect(() => {
+          if (!authData) {
+            document.getElementById("boxLogin").style.display = "flex";
+          } else {
+            document.getElementById("boxLogin").style.display = "none";
+          }
+      }, [authData])
 
     return (
         <Box component="footer" className={styles.footerContainer}>
@@ -62,7 +72,7 @@ export default function Footer() {
                     </Grid>
 
                     {/* Coluna 4: Colaboradores */}
-                    <Grid item xs={12} sm={6} md={3}>
+                    <Grid item xs={12} sm={6} md={3} id="boxLogin">
                         <Typography variant="subtitle1" className={styles.sectionTitle}>
                             Colaboradores
                         </Typography>

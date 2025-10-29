@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// Este hook agora gerencia todas as operações relacionadas a doces na API
 export default function DocesServices() {
     const [loading, setLoading] = useState(false);
     const url = 'http://localhost:3333';
@@ -78,6 +77,18 @@ export default function DocesServices() {
         .finally(() => setLoading(false));
     }
 
+    const listarComReceitas = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${url}/produtos/com-receitas`);
+            if (!response.ok) {
+                throw new Error('Falha ao buscar produtos com receitas.');
+            }
+            return await response.json();
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return {
         loading,
@@ -85,5 +96,6 @@ export default function DocesServices() {
         cadastrar,
         editar,
         excluir,
+        listarComReceitas,
     };
 }
