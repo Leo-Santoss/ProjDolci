@@ -55,7 +55,7 @@ export default function Receitas() {
                                     <CardMedia
                                         component="img"
                                         height="240"
-                                        image={produto.imagem ? `http://localhost:3333/uploads/${produto.imagem}` : 'https://via.placeholder.com/400'}
+                                        image={produto.imagem ? produto.imagem : 'https://via.placeholder.com/400'}
                                         alt={produto.nome}
                                         sx={{ objectFit: 'cover' }}
                                     />

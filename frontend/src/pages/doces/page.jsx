@@ -140,7 +140,7 @@ export default function Doces() {
                             <Grid className={styles.divImgProduto}>
                                 <CardMedia
                                     component="img"
-                                    image={`http://localhost:3333/uploads/${selectedProduct.imagem}`}
+                                    image={selectedProduct.imagem}
                                     alt={selectedProduct.nome}
                                     className={styles.imgProduto}
                                 />
@@ -227,13 +227,13 @@ export default function Doces() {
                                                     <Typography fontSize={'20px'}><strong>Passo a Passo Visual:</strong></Typography>
                                                     <Grid container spacing={2} sx={{ mt: 1 }}>
                                                         {receita.imagem_passo1 && (
-                                                            <CardMedia className={styles.imagemPassos} component="img" image={`http://localhost:3333/uploads/${receita.imagem_passo1}`} alt="Passo 1" sx={{ width: '100%', borderRadius: 1 }}/>
+                                                            <CardMedia className={styles.imagemPassos} component="img" image={receita.imagem_passo1} alt="Passo 1" sx={{ width: '100%', borderRadius: 1 }}/>
                                                         )}
                                                         {receita.imagem_passo2 && (
-                                                            <CardMedia className={styles.imagemPassos} component="img" image={`http://localhost:3333/uploads/${receita.imagem_passo2}`} alt="Passo 2" sx={{ width: '100%', borderRadius: 1 }}/>
+                                                            <CardMedia className={styles.imagemPassos} component="img" image={receita.imagem_passo2} alt="Passo 2" sx={{ width: '100%', borderRadius: 1 }}/>
                                                         )}
                                                         {receita.imagem_passo3 && (
-                                                            <CardMedia className={styles.imagemPassos} component="img" image={`http://localhost:3333/uploads/${receita.imagem_passo3}`} alt="Passo 3" sx={{ width: '100%', borderRadius: 1 }}/>
+                                                            <CardMedia className={styles.imagemPassos} component="img" image={receita.imagem_passo3} alt="Passo 3" sx={{ width: '100%', borderRadius: 1 }}/>
                                                         )}
                                                     </Grid>
                                                 </>
@@ -266,7 +266,7 @@ export default function Doces() {
                                         <CardMedia  
                                             component="img"
                                             height="200"
-                                            image={item.imagem ? `http://localhost:3333/uploads/${item.imagem}` : 'https://via.placeholder.com/200'}
+                                            image={item.imagem ? item.imagem : 'https://via.placeholder.com/200'}
                                             alt={item.nome}
                                             sx={{ objectFit: 'cover' }}
                                         />

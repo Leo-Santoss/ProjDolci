@@ -86,7 +86,7 @@ export default function Home() {
                   <CardMedia
                     component="img"
                     height="400"
-                    image={item.imagem ? `http://localhost:3333/uploads/${item.imagem}` : 'https://via.placeholder.com/400'}
+                    image={item.imagem ? item.imagem : 'https://via.placeholder.com/400'}
                     alt={item.nome}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>

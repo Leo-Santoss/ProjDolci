@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function ReceitasServices() {
     const [loading, setLoading] = useState(false);
-    const url = 'http://localhost:3333';
+    const url = 'https://dolciapi.onrender.com/api';
 
     // Busca a receita de um produto específico
 
@@ -30,36 +30,21 @@ export default function ReceitasServices() {
     };
 
     // Função inteligente para CRIAR ou ATUALIZAR
-    const salvar = (receitaData, files) => {
+    const salvar = (receitaData) => {
         setLoading(true);
         
-        const data = new FormData();
-        // Adiciona campos de texto
-        Object.keys(receitaData).forEach(key => {
-            // Não adiciona os campos de imagem que estão no formData
-            if (!key.startsWith('imagem_passo')) {
-                data.append(key, receitaData[key]);
-            }
-        });
-        
-        // Adiciona os arquivos de imagem
-        Object.keys(files).forEach(key => {
-            if (files[key]) { // Apenas se um arquivo foi selecionado
-                data.append(key, files[key]);
-            }
-        });
-
         const isUpdating = !!receitaData.id;
         const endpoint = isUpdating ? `${url}/receitas/${receitaData.id}` : `${url}/receitas`;
         const method = isUpdating ? 'PUT' : 'POST';
 
         return fetch(endpoint, {
             method: method,
-            body: data,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(receitaData),
         })
         .then(response => {
             if (!response.ok && response.status !== 204) { // 204 é uma resposta OK para PUT
-                return response.json().then(res => { throw new Error(res.message) });
+                return response.json().then(res => { throw new Error(res.message || 'Erro') });
             }
             return { success: true, message: 'Receita salva com sucesso!' };
         })

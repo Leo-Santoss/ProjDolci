@@ -2,13 +2,13 @@ import { useState } from "react";
 
 export default function DocesServices() {
     const [loading, setLoading] = useState(false);
-    const url = 'http://localhost:3333';
+    const url = 'https://dolciapi.onrender.com/api';
 
     // FUNÇÃO PARA LISTAR TODOS OS DOCES
     const listar = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${url}/produtos`);
+            const response = await fetch(`${url}/doces`);
             if (!response.ok) {
                 throw new Error('Falha ao buscar os dados.');
             }
@@ -20,41 +20,33 @@ export default function DocesServices() {
     };
 
     // FUNÇÃO PARA CADASTRAR UM NOVO DOCE
-    const cadastrar = (formData, imagemFile) => {
+    const cadastrar = (formData) => {
         setLoading(true);
-        const data = new FormData();
-        Object.keys(formData).forEach(key => data.append(key, formData[key]));
-        if (imagemFile) {
-            data.append('imagem', imagemFile);
-        }
 
-        return fetch(`${url}/produtos`, {
+        return fetch(`${url}/doces`, {
             method: 'POST',
-            body: data,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
         })
         .then(response => response.json().then(res => {
-            if (!response.ok) throw new Error(res.message);
+            if (!response.ok) throw new Error(res.message || 'Erro');
             return res;
         }))
         .finally(() => setLoading(false));
     };
 
     // FUNÇÃO PARA EDITAR UM DOCE EXISTENTE
-    const editar = (id, formData, imagemFile) => {
+    const editar = (id, formData) => {
         setLoading(true);
-        const data = new FormData();
-        Object.keys(formData).forEach(key => data.append(key, formData[key]));
-        if (imagemFile) {
-            data.append('imagem', imagemFile);
-        }
 
-        return fetch(`${url}/produtos/${id}`, {
-            method: 'PUT', // Método PUT para atualização
-            body: data,
+        return fetch(`${url}/doces/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
         })
         .then(response => {
             if (!response.ok) {
-                return response.json().then(res => { throw new Error(res.message) });
+                return response.json().then(res => { throw new Error(res.message || 'Erro') });
             }
             // PUT com sucesso geralmente retorna 204 No Content, que não tem corpo
             return { success: true, message: 'Atualizado com sucesso!' };
@@ -65,7 +57,7 @@ export default function DocesServices() {
     // FUNÇÃO PARA EXCLUIR UM DOCE
     const excluir = (id) => {
         setLoading(true);
-        return fetch(`${url}/produtos/${id}`, {
+        return fetch(`${url}/doces/${id}`, {
             method: 'DELETE',
         })
         .then(response => {
@@ -80,7 +72,7 @@ export default function DocesServices() {
     const listarComReceitas = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${url}/produtos/com-receitas`);
+            const response = await fetch(`${url}/doces`);
             if (!response.ok) {
                 throw new Error('Falha ao buscar produtos com receitas.');
             }
